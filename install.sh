@@ -21,7 +21,7 @@ exit
 fi
 apt install nginx
 service nginx start
-rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-enabled/*
 echo '
 server {
         listen 80 default_server;
@@ -34,6 +34,8 @@ server {
         index index.html index.htm index.nginx-debian.html;
         server_name _;
         location / {
-                proxy_pass https://apple.com;
+                proxy_pass https://digitalocean.com;
         }
 }' >> /etc/nginx/sites-enabled/wse
+
+service nginx restart
