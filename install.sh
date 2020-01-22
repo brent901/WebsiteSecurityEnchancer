@@ -19,3 +19,21 @@ then
 echo "HTTP Server detected, can not install."
 exit
 fi
+apt install nginx
+service nginx start
+rm /etc/nginx/sites-enabled/default
+echo '
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Frame-Options SAMEORIGIN always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        proxy_set_header X-Real-IP $remote_addr;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+                proxy_pass https://apple.com;
+        }
+}' >> /etc/nginx/sites-enabled/wse
