@@ -13,15 +13,9 @@ fi
 apt update
 apt upgrade -y
 apt install net-tools
-if [  ou need to enter 'y' in order to continue"
+
+if [ ${netstat -l | grep http} != "" ]
+then
+echo "HTTP Server detected, can not install."
 exit
 fi
-apt update
-apt upgrade -y
-apt install net-tools
-
-#if [ != "" ] -->netstat -l | grep http
-#then
-#echo "HTTP Server detected, can not install."
-#exit
-#fi
