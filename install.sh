@@ -24,11 +24,12 @@ fi
 apt install nginx -y
 service nginx start
 rm /etc/nginx/sites-enabled/*
+mkdir /var/www/proxy
 echo '
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
-        root /var/www/html;
+        root /var/www/proxy;
         add_header X-Content-Type-Options "nosniff" always;
         add_header X-Frame-Options SAMEORIGIN always;
         add_header X-XSS-Protection "1; mode=block" always;
@@ -39,5 +40,15 @@ server {
                 proxy_pass '$website';
         }
 }' >> /etc/nginx/sites-enabled/wse
-
+server {
+        listen 8080 default_server;
+        listen [::]:8080 default_server;
+        root /var/www/html;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Frame-Options SAMEORIGIN always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        proxy_set_header X-Real-IP $remote_addr;
+        index index.php index.html index.htm index.nginx-debian.html;
+        server_name _;
+}' >> /etc/nginx/sites-enabled/control
 service nginx restart
