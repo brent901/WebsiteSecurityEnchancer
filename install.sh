@@ -10,7 +10,7 @@ then
 echo "You need to enter 'y' in order to continue"
 exit
 fi
-echo "Website URL/IP (including http:// or https://): "
+echo "Website URL/IP to protect (including http:// or https://): "
 read website
 apt update
 apt upgrade -y
