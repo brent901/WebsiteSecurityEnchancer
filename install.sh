@@ -12,14 +12,14 @@ exit
 fi
 apt update
 apt upgrade -y
-apt install net-tools
+apt install net-tools -y
 
 if [ "$(netstat -l | grep http)" != "" ]
 then
 echo "HTTP Server detected, can not install."
 exit
 fi
-apt install nginx
+apt install nginx -y
 service nginx start
 rm /etc/nginx/sites-enabled/*
 echo '
@@ -34,7 +34,7 @@ server {
         index index.html index.htm index.nginx-debian.html;
         server_name _;
         location / {
-                proxy_pass https://digitalocean.com;
+                proxy_pass ;
         }
 }' >> /etc/nginx/sites-enabled/wse
 
