@@ -34,7 +34,7 @@ server {
         index index.html index.htm index.nginx-debian.html;
         server_name _;
         location / {
-                proxy_pass ;
+                proxy_pass https://www.example.com;
         }
 }' >> /etc/nginx/sites-enabled/wse
 
