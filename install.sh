@@ -10,6 +10,8 @@ then
 echo "You need to enter 'y' in order to continue"
 exit
 fi
+echo "Website URL/IP: "
+read website
 apt update
 apt upgrade -y
 apt install net-tools -y
@@ -34,7 +36,7 @@ server {
         index index.html index.htm index.nginx-debian.html;
         server_name _;
         location / {
-                proxy_pass https://www.example.com;
+                proxy_pass '$website';
         }
 }' >> /etc/nginx/sites-enabled/wse
 
