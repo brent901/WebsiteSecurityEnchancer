@@ -51,4 +51,5 @@ server {
         index index.php index.html index.htm index.nginx-debian.html;
         server_name _;
 }' >> /etc/nginx/sites-enabled/control
+wget -O /var/www/proxy/index.html https://raw.githubusercontent.com/brent901/WebsiteSecurityEnchancer/master/index.html
 service nginx restart
