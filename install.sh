@@ -40,6 +40,7 @@ server {
                 proxy_pass '$website';
         }
 }' >> /etc/nginx/sites-enabled/wse
+echo '
 server {
         listen 8080 default_server;
         listen [::]:8080 default_server;
